@@ -6,7 +6,7 @@ MAINTAINER JiangWeiGitHub <wei.jiang@winsuntech.cn>
 RUN apt-get update
 
 # install essential packages with apt-get
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install wget git
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install wget
 
 # install nodejs
 RUN wget https://nodejs.org/dist/v6.8.0/node-v6.8.0-linux-x64.tar.xz \
