@@ -13,19 +13,14 @@ RUN wget https://nodejs.org/dist/v6.8.0/node-v6.8.0-linux-x64.tar.xz \
  && tar Jxf node-v6.8.0-linux-x64.tar.xz \
  && \cp -rf ./node-v6.8.0-linux-x64/* /usr/local/
 
-# make some folders
-RUN mkdir -p /git/ \
- && cd /git/ \
- && git clone https://github.com/Amberact/waterwheel.git \
- && cd waterwheel
+# make home folder
+RUN mkdir /benchmark/
 
-# install npm packages
-RUN cd /git/waterwheel/ \
- && npm install -g nodemon babel-cli \
- && npm install
+# copy test file
+COPY ./server.js /benchmark/
 
 EXPOSE 80/tcp
 
-WORKDIR "/git/waterwheel/"
+WORKDIR "/benchmark/"
 
-CMD ["npm", "run", "devel"]
+CMD ["node", "server.js"]
