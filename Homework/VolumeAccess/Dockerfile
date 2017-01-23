@@ -11,12 +11,22 @@ RUN echo "deb http://ubuntu.uestc.edu.cn/ubuntu/ xenial main restricted universe
 # update apt
 RUN apt-get update
 
-# install minidlna
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install minidlna
+# install softwares
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install wget xz-utils git \
+ && wget https://nodejs.org/dist/v6.9.4/node-v6.9.4-linux-x64.tar.xz \
+ && tar Jxf node-v6.9.4-linux-x64.tar.xz \
+ && \cp -rf ./node-v6.9.4-linux-x64/* /usr/local/ \
+ && rm -rf ./node-v6.9.4-linux-x64*
 
-# delete minidlna conf & using mine
-RUN rm /etc/minidlna.conf && mkdir -p /data/minidlna && touch /data/minidlna/minidlna.conf && ln -s /data/minidlna/minidlna.conf /etc/
+# install project & run
+RUN mkdir /volumeAccess \
+ && cd /volumeAccess \
+ && git clone ????? \
+ && cd ????? \
+ && npm install
 
-EXPOSE 8080/tcp 8200/tcp 1900/udp
+WORKDIR "/volumeAccess/??????"
 
-CMD ["/usr/sbin/minidlnad", "-d"]
+EXPOSE 8080/tcp
+
+CMD ["/usr/local/bin/node", "???.js"]
