@@ -14,6 +14,9 @@ RUN apt-get update
 # install minidlna
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y install minidlna
 
+# delete minidlna conf & using mine
+RUN rm /etc/minidlna.conf && mkdir -p /data/minidlna && touch /data/minidlna/minidlna.conf && ln -s /data/minidlna/minidlna.conf /etc/
+
 EXPOSE 8080/tcp 8200/tcp 1900/udp
 
 CMD ["/usr/sbin/minidlnad", "-d"]
