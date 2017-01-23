@@ -21,12 +21,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install wget xz-utils git \
 # install project & run
 RUN mkdir /volumeAccess \
  && cd /volumeAccess \
- && git clone ????? \
- && cd ????? \
+ && git clone https://github.com/JiangWeiGitHub/DaoCloud.git \
+ && cd DaoCloud/Homework/VolumeAccess/project \
  && npm install
 
-WORKDIR "/volumeAccess/??????"
+WORKDIR "/volumeAccess/DaoCloud/Homework/VolumeAccess/project"
 
 EXPOSE 8080/tcp
 
-CMD ["/usr/local/bin/node", "???.js"]
+CMD ["/usr/local/bin/node", "app.js"]
