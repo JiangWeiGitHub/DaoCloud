@@ -1,7 +1,7 @@
 # Volume Access
 
 ### Goal
-  Run a `minidlna` docker with `volume`, add a configuration file into this volume on `DaoCloud`'s webpage, check whether the file is working with `http` server running inside docker which I use for printing log.
+  Run a `express` docker with `volume`, add a json file into this volume on `DaoCloud`'s webpage, check whether the file is working with `express` server running inside docker which I use for printing log.
 
 ### Local Development
   + run docker server <p>
@@ -12,18 +12,20 @@
   + run `Dockerfile` & create `VolumeAccess` image <p>
   `docker -H tcp://192.168.154.140:6666 build -t=volume_access .`
   
-  + create `minidlna.conf` refer to `Dockerfile` & some testing files like music\pic\video <p>
+  + create `sample.json` <p>
   ```
-    ### minidlna.conf ###
-    
-    media_dir=A,/data/music
-    media_dir=P,/data/pic
-    media_dir=V,/data/video
-    friendly_name=helloworldwisnuc
+    {
+      "version": "0.0.1",
+      "name": "Volume Access Test",
+      "Infor": "Hello World"
+    }
   ```
 
   + run this image <p>
-  `docker -H tcp://192.168.154.140:6666 run --net=host -p 8200:8200 -p 1900:1900/udp -v /home/wisnuc/Documents/minidlna/minidlna.conf:/data/minidlna/minidlna.conf -v /home/wisnuc/Documents/data/music:/data/music -v /home/wisnuc/Documents/data/pic:/data/pic -v /home/wisnuc/Documents/data/video:/data/video d859720fc016`
+  `docker -H tcp://192.168.154.140:6666 run -p 8080:8080/tcp -v /home/wisnuc/Documents/sample.json:/data/sample.json d859720fc016`
+  
+  + open `chrome`, check whether is working
+  `192.168.154.140:8080`
   
 ### DaoCloud Development
   + create a new project <p>
